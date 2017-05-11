@@ -17,7 +17,7 @@ public class ReadingSample implements Comparable<ReadingSample>{
 	private Integer numberOfWords;
 	private Double readingLevel;
 	public QuestionList quiz;
-	public int MIN_PARAGRAPH_WORDS = 10;
+	public int MIN_PARAGRAPH_WORDS = 1;
 	
 	public ReadingSample(String fileName, int paragraphes){
 		try {
@@ -48,10 +48,11 @@ public class ReadingSample implements Comparable<ReadingSample>{
 	public ReadingSample(String fileName, int chapterStart, int chapterEnd){
 		try {
 			Scanner sc = new Scanner(new FileInputStream(fileName));
-			this.name = sc.nextLine();
+			//this.name = sc.nextLine();
 			int pCount = 0;
 			String line = "";
-			
+			System.out.print("opened file: ");
+			System.out.println(fileName);
 			//Find Starting Paragraph
 			while (pCount < chapterStart){
 				if (sc.hasNextLine()){

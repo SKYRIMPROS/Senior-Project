@@ -37,7 +37,7 @@ public class ReadingTestGUI extends JFrame
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4959995150339388118L;
+	private static final long serialVersionUID = 4959995150330388118L;
 	
 	ArrayList<ReadingSample> passages = new ArrayList<ReadingSample>();
 	int passageIndex = 0;
@@ -47,21 +47,21 @@ public class ReadingTestGUI extends JFrame
 	Double wpm;
 	
 	
-	private JLabel welcomeHeadingLabel, instructionsLabel,
+	private JLabel welcomeHeadingLabel,
 	resultsLabel, titleLabel, wordCountLabel, readingLevelLabel,
 	wpmLabel, scoreLabel;
 	private ArrayList<JLabel> questions = new ArrayList<JLabel>();
 	private ArrayList<JRadioButton> options = new ArrayList<JRadioButton>();
 	private ArrayList<JTextField> answers = new ArrayList<JTextField>();
-	private JButton beginButton, startTestButton, doneButton, resultsButton, againButton, quitButton;
+	private JButton beginButton, doneButton, resultsButton, againButton, quitButton;
 	private JTextArea passageText;
 	private JPanel base;
 	private CardLayout window;
 	
 	public ReadingTestGUI(){
 		//Populate list of passages
-		this.passages.add(new ReadingSample("bookOne", 1, 6));
-		this.passages.add(new ReadingSample("alice_in_wonderland", 1, 5));
+		this.passages.add(new ReadingSample("rylee_story", 1, 2));
+		//this.passages.add(new ReadingSample("rylee_story", 1, 2));
 		Collections.sort(this.passages);
 		int minQuestions = 10;
 		for(ReadingSample each : passages){
@@ -84,15 +84,14 @@ public class ReadingTestGUI extends JFrame
 		JPanel welcomePanel = new JPanel();
 		welcomePanel.setLayout(new GridLayout(3, 1));
 		//Heading
-		welcomeHeadingLabel = new JLabel("Please choose one of the following chapters:");
+		welcomeHeadingLabel = new JLabel("Please choose one of the following stories:");
 		welcomePanel.add(welcomeHeadingLabel);
 		//Passages
 		JPanel optionsPanel = new JPanel();
 		ButtonGroup optionsGroup = new ButtonGroup();
 		optionsPanel.setLayout(new GridLayout(this.passages.size(), 1));
-		optionsPanel.setBorder(BorderFactory.createTitledBorder("Chapters"));
-		options.add(new JRadioButton("Chapter 1"));
-		options.add(new JRadioButton("Chapter 2"));
+		optionsPanel.setBorder(BorderFactory.createTitledBorder("Stories"));
+		options.add(new JRadioButton("Story 1"));
 		for (JRadioButton each : options){
 			each.addActionListener(this);
 			optionsGroup.add(each);
@@ -225,10 +224,10 @@ public class ReadingTestGUI extends JFrame
 		resultsPanel.add(finnishedButtonPanel);
 		
 		//---Card Holder----
-		JPanel resultsBase = new JPanel();
+		/*JPanel resultsBase = new JPanel();
 		resultsBase.add(resultsPanel);
 		JPanel quizBase = new JPanel();
-		quizBase.add(quizPanel);
+		quizBase.add(quizPanel);*/
 		JPanel passageBase = new JPanel();
 		passageBase.add(passagePanel);
 		//JPanel instructionsBase = new JPanel();
@@ -241,8 +240,8 @@ public class ReadingTestGUI extends JFrame
 		base.add(welcomeBase, WELCOMEPANEL);
 		//base.add(instructionsBase, INSTRUCTIONSPANEL);
 		base.add(passageBase, PASSAGEPANEL);
-		base.add(quizBase, QUIZPANEL);
-		base.add(resultsBase, RESULTSPANEL);
+		//base.add(quizBase, QUIZPANEL);
+		//base.add(resultsBase, RESULTSPANEL);
 		this.add(base);
 
 		window = (CardLayout) (base.getLayout());
@@ -299,21 +298,21 @@ public class ReadingTestGUI extends JFrame
 			this.window.next(this.base);	
 			this.setSize(450, this.passageText.getHeight()+125);
 			this.centerWindow(this);
-			start = System.currentTimeMillis();
+			//start = System.currentTimeMillis();
 		}
 		
 		if (e.getSource() == this.doneButton){
 			this.window.next(this.base);	
-			this.setSize(575, 85+(this.answers.size()*50));
+			this.setSize(575, 150+(this.options.size()*50));
 			this.centerWindow(this);
-			elapsedTimeMillis = System.currentTimeMillis()-start;
-			double elapsedTimeMin = elapsedTimeMillis/1000F/60;
+			//elapsedTimeMillis = System.currentTimeMillis()-start;
+			//double elapsedTimeMin = elapsedTimeMillis/1000F/60;
 //			System.out.println(this.passages.size());
 //			System.out.println(this.passageIndex);
-			this.wpm = this.passages.get(this.passageIndex).getNumberOfWords()/elapsedTimeMin;
+			/*this.wpm = this.passages.get(this.passageIndex).getNumberOfWords()/elapsedTimeMin;
 			for (int i=0; i<this.questions.size(); i++){
 				questions.get(i).setText(this.passages.get(this.passageIndex).quiz.questions.get(i).askQuestion());
-			}
+			}*/
 			
 		}
 		

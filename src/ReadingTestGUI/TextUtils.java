@@ -10,6 +10,10 @@ import java.util.ArrayList;
  *
  */
 public class TextUtils {
+	//public static String passageSeperation(String text){
+		
+		
+	//}
 	public static String FormatText(String text, int width){
 		String[] numberOfWords = text.split(" ");
 		String out = "";

@@ -53,15 +53,15 @@ public class ReadingTestGUI extends JFrame
 	private ArrayList<JLabel> questions = new ArrayList<JLabel>();
 	private ArrayList<JRadioButton> options = new ArrayList<JRadioButton>();
 	private ArrayList<JTextField> answers = new ArrayList<JTextField>();
-	private JButton beginButton, doneButton, resultsButton, againButton, quitButton;
+	private JButton beginButton, nextButton, resultsButton, againButton, quitButton, next2Button;
 	private JTextArea passageText;
 	private JPanel base;
 	private CardLayout window;
 	
 	public ReadingTestGUI(){
 		//Populate list of passages
-		this.passages.add(new ReadingSample("rylee_story", 1, 2));
-		//this.passages.add(new ReadingSample("rylee_story", 1, 2));
+		this.passages.add(new ReadingSample("rylee_story", 1, 3));
+		//this.passages.add(new ReadingSample("rylee_story", 4, 5));
 		Collections.sort(this.passages);
 		int minQuestions = 10;
 		for(ReadingSample each : passages){
@@ -126,21 +126,37 @@ public class ReadingTestGUI extends JFrame
 		instructionsPanel.add(instructionsButtonPanel);
 		*/
 		
-		//---Read Passage--
-		final String PASSAGEPANEL = "Passage";
-		JPanel passagePanel = new JPanel();
-		passagePanel.setLayout(new GridLayout(2,1));
-		JPanel passageTextPanel = new JPanel();
+		//---Read Page 1--
+		final String PASSAGEONEPANEL = "Page 1";
+		JPanel passageOnePanel = new JPanel();
+		passageOnePanel.setLayout(new GridLayout(2,1));
+		JPanel passageOneTextPanel = new JPanel();
 		passageText = new JTextArea(this.passages.get(passageIndex).getFormattedText(70));
-		passageTextPanel.add(passageText);
-		passageTextPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-		passagePanel.add(passageTextPanel);
-		JPanel doneButtonPanel = new JPanel();
-		doneButton = new JButton("Done");
-		doneButton.setPreferredSize(new Dimension(325,50));
-		doneButton.addActionListener(this);
-		doneButtonPanel.add(doneButton);
-		passagePanel.add(doneButtonPanel);
+		passageOneTextPanel.add(passageText);
+		passageOneTextPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		passageOnePanel.add(passageOneTextPanel);
+		JPanel nextButtonPanel = new JPanel();
+		nextButton = new JButton("Next");
+		nextButton.setPreferredSize(new Dimension(325,50));
+		nextButton.addActionListener(this);
+		nextButtonPanel.add(nextButton);
+		passageOnePanel.add(nextButtonPanel);
+		
+		//---Read Page 2---
+		final String PASSAGETWOPANEL = "Page 2";
+		JPanel passageTwoPanel = new JPanel();
+		passageTwoPanel.setLayout(new GridLayout(2,1));
+		JPanel passageTwoTextPanel = new JPanel();
+		passageText = new JTextArea(this.passages.get(passageIndex).getFormattedText(70));
+		passageTwoTextPanel.add(passageText);
+		passageTwoTextPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		passageTwoPanel.add(passageTwoTextPanel);
+		JPanel next2ButtonPanel = new JPanel();
+		next2Button = new JButton("Next");
+		next2Button.setPreferredSize(new Dimension(325,50));
+		next2Button.addActionListener(this);
+		next2ButtonPanel.add(next2Button);
+		passageTwoPanel.add(next2ButtonPanel);
 		
 		//---Quiz---
 		final String QUIZPANEL = "Quiz";
@@ -228,8 +244,10 @@ public class ReadingTestGUI extends JFrame
 		resultsBase.add(resultsPanel);
 		JPanel quizBase = new JPanel();
 		quizBase.add(quizPanel);*/
+		JPanel passageTwoBase = new JPanel();
+		passageTwoBase.add(passageTwoPanel);
 		JPanel passageBase = new JPanel();
-		passageBase.add(passagePanel);
+		passageBase.add(passageOnePanel);
 		//JPanel instructionsBase = new JPanel();
 		//instructionsBase.add(instructionsPanel);
 		JPanel welcomeBase = new JPanel();
@@ -239,7 +257,8 @@ public class ReadingTestGUI extends JFrame
 		base.setLayout(new CardLayout());
 		base.add(welcomeBase, WELCOMEPANEL);
 		//base.add(instructionsBase, INSTRUCTIONSPANEL);
-		base.add(passageBase, PASSAGEPANEL);
+		base.add(passageBase, PASSAGEONEPANEL);
+		base.add(passageTwoBase, PASSAGETWOPANEL);
 		//base.add(quizBase, QUIZPANEL);
 		//base.add(resultsBase, RESULTSPANEL);
 		this.add(base);
@@ -301,7 +320,7 @@ public class ReadingTestGUI extends JFrame
 			//start = System.currentTimeMillis();
 		}
 		
-		if (e.getSource() == this.doneButton){
+		if (e.getSource() == this.nextButton){
 			this.window.next(this.base);	
 			this.setSize(575, 150+(this.options.size()*50));
 			this.centerWindow(this);

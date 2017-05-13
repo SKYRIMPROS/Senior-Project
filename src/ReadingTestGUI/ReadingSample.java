@@ -51,8 +51,6 @@ public class ReadingSample implements Comparable<ReadingSample>{
 			//this.name = sc.nextLine();
 			int pCount = 0;
 			String line = "";
-			System.out.print("opened file: ");
-			System.out.println(fileName);
 			//Find Starting Paragraph
 			while (pCount < chapterStart){
 				if (sc.hasNextLine()){
